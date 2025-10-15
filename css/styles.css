@@ -1,0 +1,100 @@
+/* -------- FONDO GALÁCTICO ANIMADO -------- */
+.informativa {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: #f5f5f5;
+  background: radial-gradient(circle at center, #0a0a0a 40%, #000 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: "Orbitron", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.informativa::before,
+.informativa::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                    radial-gradient(2px 2px at 100px 80px, #fff, transparent),
+                    radial-gradient(1px 1px at 200px 150px, #fff, transparent),
+                    radial-gradient(1.5px 1.5px at 400px 300px, #fff, transparent),
+                    radial-gradient(2px 2px at 600px 500px, #fff, transparent),
+                    radial-gradient(1.5px 1.5px at 800px 700px, #fff, transparent),
+                    radial-gradient(2px 2px at 1000px 900px, #fff, transparent);
+  background-repeat: repeat;
+  animation: estrellas 100s linear infinite;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.informativa::after {
+  animation-duration: 150s;
+  opacity: 0.3;
+}
+
+@keyframes estrellas {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-500px, 1000px, 0);
+  }
+}
+
+/* -------- TEXTO Y ELEMENTOS -------- */
+.informativa .titulo {
+  font-size: 3rem;
+  letter-spacing: 4px;
+  color: #ffe81f;
+  text-shadow: 0 0 10px #ffe81f;
+  margin-bottom: 10px;
+  z-index: 1;
+}
+
+.informativa .autor {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #ccc;
+  z-index: 1;
+}
+
+.informativa .logo {
+  width: 280px;
+  margin: 20px 0;
+  filter: drop-shadow(0 0 10px #ffe81f);
+  z-index: 1;
+}
+
+.informativa .descripcion p {
+  font-size: 1.1rem;
+  color: #ddd;
+  margin: 10px 0;
+  max-width: 500px;
+  z-index: 1;
+}
+
+.informativa .link a {
+  color: #ffe81f;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.informativa .link a:hover {
+  text-decoration: underline;
+}
+
+.informativa .version {
+  margin-top: 10px;
+  color: #888;
+  font-size: 0.9rem;
+  z-index: 1;
+}
