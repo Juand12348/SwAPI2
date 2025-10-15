@@ -1,11 +1,10 @@
-// 🔹 Genera la lista de personajes
 function generarLista(arrayPersonajes) {
     let listaHTML = "";
     for (let i = 0; i < arrayPersonajes.length; i++) {
-        // Siempre usar uid
+        
         let id = arrayPersonajes[i].uid;
 
-        // Nombre puede estar en distintos lugares según el formato
+        
         let name = arrayPersonajes[i].name 
             ? arrayPersonajes[i].name 
             : (arrayPersonajes[i].properties?.name || "Desconocido");
@@ -20,7 +19,7 @@ function generarLista(arrayPersonajes) {
     return listaHTML;
 }
 
-// 🔹 Función de búsqueda
+
 function buscadorfuncion(sza) {
     if (sza.length >= 3) {
         const filtrados = [];
@@ -41,12 +40,12 @@ function buscadorfuncion(sza) {
     }
 }
 
-// 🔹 Función principal del Home
+
 function Home() {
     const root = document.getElementById("root");
-    root.innerHTML = ""; // limpiar antes de renderizar
+    root.innerHTML = ""; 
 
-    // Crear buscador
+    
     const buscador = document.createElement("input");
     buscador.classList.add("c-buscador");
     buscador.type = "text";
@@ -55,7 +54,7 @@ function Home() {
         buscadorfuncion(buscador.value);
     });
 
-    // Crear botones de categorías (API)
+    
     const categorias = [
         { id: "people", titulo: "Personajes" },
         { id: "films", titulo: "Películas" },
@@ -77,19 +76,19 @@ function Home() {
         contenedorCategorias.appendChild(btn);
     });
 
-    // Crear lista inicial de personajes
+    
     const listaHTML = generarLista(personajes);
     const contenedorPersonajes = document.createElement("section");
     contenedorPersonajes.id = "la-lista";
     contenedorPersonajes.innerHTML = listaHTML;
 
-    // Insertar en el root
+    
     root.appendChild(buscador);
     root.appendChild(contenedorCategorias);
     root.appendChild(contenedorPersonajes);
 }
 
-// 🔹 Mostrar categorías (películas, naves, especies, etc.)
+
 async function MostrarCategoria(categoria, titulo) {
     const root = document.getElementById("root");
     root.innerHTML = `<h2>${titulo}</h2><p>Cargando...</p>`;
@@ -101,7 +100,7 @@ async function MostrarCategoria(categoria, titulo) {
         let listaHTML = "";
 
         if (data.results) {
-            // Personajes, planetas, especies, etc.
+            
             data.results.forEach(item => {
                 listaHTML += `
                 <div class="c-lista-personaje">
@@ -110,7 +109,7 @@ async function MostrarCategoria(categoria, titulo) {
                 </div>`;
             });
         } else if (data.result) {
-            // Películas
+            
             data.result.forEach(item => {
                 listaHTML += `
                 <div class="c-lista-personaje">

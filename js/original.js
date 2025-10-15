@@ -1,7 +1,7 @@
-// Guardar personajes descubiertos
+
 var misNumeros = JSON.parse(localStorage.getItem("misNumeros")) || [];
 
-// Generar 4 personajes aleatorios
+
 function Aleatorios() {
     document.getElementById("nuevos").innerHTML = "";
     console.log("----------------------------------");
@@ -13,23 +13,23 @@ function Aleatorios() {
         let personaje = personajes[num - 1];
         let nombre = personaje?.name || personaje?.properties?.name || "Desconocido";
 
-        // Mostrar los nuevos personajes aleatorios
+        
         nuevosPersonajes += `
             <div class="c-lista-personaje c-un_aleatorio">
                 <p>#${num}</p>
                 <p>${nombre}</p>
             </div>`;
 
-        // Comprobar si ya existe
+        
         misNumeros = JSON.parse(localStorage.getItem("misNumeros")) || [];
         let existe = misNumeros.includes(num);
 
-        // Si no existe, agregarlo
+        
         if (!existe) {
             misNumeros.push(num);
             localStorage.setItem("misNumeros", JSON.stringify(misNumeros));
 
-            // Mostrarlo en el álbum
+            
             document.getElementById("c-unper-" + num).innerHTML = `
                 <div onclick="Personaje('${personaje.uid}')">
                     <p>#${num}</p>
@@ -39,17 +39,17 @@ function Aleatorios() {
         }
     }
 
-    // Mostrar los nuevos en pantalla
+    
     document.getElementById("nuevos").innerHTML += nuevosPersonajes;
     document.getElementById("contador").innerHTML = `${misNumeros.length} / ${personajes.length}`;
 }
 
-// Mostrar álbum original (todos los personajes)
+
 function Original() {
     const root = document.getElementById("root");
     let misNumeros = JSON.parse(localStorage.getItem("misNumeros")) || [];
 
-    // Estructura principal con el botón arriba
+    
     let misPersonajes = `
         <section class="c-misper">
             <button class="btn-aleatorios" onclick="Aleatorios()">🎲 Generar Aleatorios</button>
@@ -58,7 +58,7 @@ function Original() {
             <div class="c-album">
     `;
 
-    // Recorrer todos los personajes
+    
     for (let i = 1; i <= personajes.length; i++) {
         let personaje = personajes[i - 1];
         let nombre = personaje?.name || personaje?.properties?.name || "Desconocido";

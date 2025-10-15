@@ -1,6 +1,5 @@
 let esFavorito = false;
 
-// 💾 Agregar o quitar personaje de favoritos
 function toggleFavorito(uid, name) {
     let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
     let existe = favoritos.some(fav => fav.uid === uid);
@@ -20,7 +19,6 @@ function toggleFavorito(uid, name) {
     if (boton) boton.textContent = esFavorito ? "❤️" : "🤍";
 }
 
-// 🧑‍🚀 Mostrar detalle del personaje
 async function Detalle(uid) {
     const root = document.getElementById("root");
     root.innerHTML = `<p>Cargando detalle...</p>`;
@@ -30,11 +28,9 @@ async function Detalle(uid) {
         const data = await res.json();
         const personaje = data.result.properties;
 
-        // Revisar si ya está en favoritos
         let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
         esFavorito = favoritos.some(fav => fav.uid === uid);
-
-        // Plantilla HTML del detalle
+        
         root.innerHTML = `
             <section class="c-detalle">
                 <h2>${personaje.name}</h2>
