@@ -22,14 +22,7 @@ function Aleatorios() {
 
         // Comprobar si ya existe
         misNumeros = JSON.parse(localStorage.getItem("misNumeros")) || [];
-        let existe = false;
-
-        for (let j = 0; j < misNumeros.length; j++) {
-            if (misNumeros[j] === num) {
-                existe = true;
-                break;
-            }
-        }
+        let existe = misNumeros.includes(num);
 
         // Si no existe, agregarlo
         if (!existe) {
@@ -37,7 +30,6 @@ function Aleatorios() {
             localStorage.setItem("misNumeros", JSON.stringify(misNumeros));
 
             // Mostrarlo en el álbum
-            let nombre = personaje?.name || personaje?.properties?.name || "Desconocido";
             document.getElementById("c-unper-" + num).innerHTML = `
                 <div onclick="Personaje('${personaje.uid}')">
                     <p>#${num}</p>
@@ -57,22 +49,27 @@ function Original() {
     const root = document.getElementById("root");
     let misNumeros = JSON.parse(localStorage.getItem("misNumeros")) || [];
 
-    // Contenedor principal
-    let misPersonajes = `<section class="c-misper">`;
+    // Estructura principal con el botón arriba
+    let misPersonajes = `
+        <section class="c-misper">
+            <button class="btn-aleatorios" onclick="Aleatorios()">🎲 Generar Aleatorios</button>
+            <div id="nuevos" class="c-nuevos"></div>
+            <p id="contador">${misNumeros.length} / ${personajes.length}</p>
+            <div class="c-album">
+    `;
 
+    // Recorrer todos los personajes
     for (let i = 1; i <= personajes.length; i++) {
         let personaje = personajes[i - 1];
         let nombre = personaje?.name || personaje?.properties?.name || "Desconocido";
 
         if (misNumeros.includes(i)) {
-            // Ya descubierto
             misPersonajes += `
                 <div class="c-unper c-mios-personajes" id="c-unper-${i}" onclick="Personaje('${personaje.uid}')">
                     <p>#${i}</p>
                     <p>${nombre}</p>
                 </div>`;
         } else {
-            // Aún no descubierto
             misPersonajes += `
                 <div class="c-unper no-capturado" id="c-unper-${i}">
                     <p>#${i}</p>
@@ -81,10 +78,9 @@ function Original() {
         }
     }
 
-    misPersonajes += `</section>
-        <button onclick="Aleatorios()">🎲 Generar Aleatorios</button>
-        <div id="nuevos" class="c-nuevos"></div>
-        <p id="contador">${misNumeros.length} / ${personajes.length}</p>
+    misPersonajes += `
+            </div> <!-- cierre álbum -->
+        </section>
     `;
 
     root.innerHTML = misPersonajes;
