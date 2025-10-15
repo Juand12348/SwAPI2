@@ -1,10 +1,13 @@
+// 🔹 Genera la lista de personajes
 function generarLista(arrayPersonajes) {
     let listaHTML = "";
     for (let i = 0; i < arrayPersonajes.length; i++) {
+        // Siempre usar uid
         let id = arrayPersonajes[i].uid;
 
-        let name = arrayPersonajes[i].name
-            ? arrayPersonajes[i].name
+        // Nombre puede estar en distintos lugares según el formato
+        let name = arrayPersonajes[i].name 
+            ? arrayPersonajes[i].name 
             : (arrayPersonajes[i].properties?.name || "Desconocido");
 
         listaHTML += `
@@ -17,12 +20,13 @@ function generarLista(arrayPersonajes) {
     return listaHTML;
 }
 
+// 🔹 Función de búsqueda
 function buscadorfuncion(sza) {
     if (sza.length >= 3) {
         const filtrados = [];
         for (let i = 0; i < personajes.length; i++) {
-            const nombre = personajes[i].name
-                ? personajes[i].name.toLowerCase()
+            const nombre = personajes[i].name 
+                ? personajes[i].name.toLowerCase() 
                 : (personajes[i].properties?.name.toLowerCase() || "");
 
             if (nombre.includes(sza.toLowerCase())) {
@@ -37,81 +41,55 @@ function buscadorfuncion(sza) {
     }
 }
 
-async function Home() {
+// 🔹 Función principal del Home
+function Home() {
     const root = document.getElementById("root");
-    root.innerHTML = `<p>Cargando personajes...</p>`;
+    root.innerHTML = ""; // limpiar antes de renderizar
 
-    try {
-        // 🔹 Cargar todos los personajes (recorriendo páginas)
-        let allResults = [];
-        let page = 1;
-        let seguir = true;
+    // Crear buscador
+    const buscador = document.createElement("input");
+    buscador.classList.add("c-buscador");
+    buscador.type = "text";
+    buscador.placeholder = "Buscar Personaje...";
+    buscador.addEventListener("input", () => {
+        buscadorfuncion(buscador.value);
+    });
 
-        while (seguir) {
-            const res = await fetch(`https://www.swapi.tech/api/people?page=${page}&limit=10`);
-            const data = await res.json();
+    // Crear botones de categorías (API)
+    const categorias = [
+        { id: "people", titulo: "Personajes" },
+        { id: "films", titulo: "Películas" },
+        { id: "species", titulo: "Especies" },
+        { id: "planets", titulo: "Planetas" },
+        { id: "starships", titulo: "Naves" },
+        { id: "vehicles", titulo: "Vehículos" }
+    ];
 
-            if (data.results && data.results.length > 0) {
-                allResults = allResults.concat(data.results);
-                page++;
-            } else {
-                seguir = false;
-            }
-        }
+    const contenedorCategorias = document.createElement("div");
+    contenedorCategorias.classList.add("categorias-container");
 
-        // Guardar los personajes globalmente
-        window.personajes = allResults;
-
-        root.innerHTML = ""; // limpiar antes de renderizar
-
-        // 🔹 Buscador
-        const buscador = document.createElement("input");
-        buscador.classList.add("c-buscador");
-        buscador.type = "text";
-        buscador.placeholder = "Buscar Personaje...";
-        buscador.addEventListener("input", () => {
-            buscadorfuncion(buscador.value);
+    categorias.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.textContent = cat.titulo;
+        btn.addEventListener("click", () => {
+            MostrarCategoria(cat.id, cat.titulo);
         });
+        contenedorCategorias.appendChild(btn);
+    });
 
-        // 🔹 Botones de categorías
-        const categorias = [
-            { id: "people", titulo: "Personajes" },
-            { id: "films", titulo: "Películas" },
-            { id: "species", titulo: "Especies" },
-            { id: "planets", titulo: "Planetas" },
-            { id: "starships", titulo: "Naves" },
-            { id: "vehicles", titulo: "Vehículos" }
-        ];
+    // Crear lista inicial de personajes
+    const listaHTML = generarLista(personajes);
+    const contenedorPersonajes = document.createElement("section");
+    contenedorPersonajes.id = "la-lista";
+    contenedorPersonajes.innerHTML = listaHTML;
 
-        const contenedorCategorias = document.createElement("div");
-        contenedorCategorias.classList.add("categorias-container");
-
-        categorias.forEach(cat => {
-            const btn = document.createElement("button");
-            btn.textContent = cat.titulo;
-            btn.addEventListener("click", () => {
-                MostrarCategoria(cat.id, cat.titulo);
-            });
-            contenedorCategorias.appendChild(btn);
-        });
-
-        // 🔹 Lista inicial de personajes (todos)
-        const listaHTML = generarLista(personajes);
-        const contenedorPersonajes = document.createElement("section");
-        contenedorPersonajes.id = "la-lista";
-        contenedorPersonajes.innerHTML = listaHTML;
-
-        // 🔹 Agregar todo al root
-        root.appendChild(buscador);
-        root.appendChild(contenedorCategorias);
-        root.appendChild(contenedorPersonajes);
-
-    } catch (error) {
-        console.error(error);
-        root.innerHTML = `<p>Error al cargar los personajes</p>`;
-    }
+    // Insertar en el root
+    root.appendChild(buscador);
+    root.appendChild(contenedorCategorias);
+    root.appendChild(contenedorPersonajes);
 }
 
+// 🔹 Mostrar categorías (películas, naves, especies, etc.)
 async function MostrarCategoria(categoria, titulo) {
     const root = document.getElementById("root");
     root.innerHTML = `<h2>${titulo}</h2><p>Cargando...</p>`;
@@ -123,7 +101,7 @@ async function MostrarCategoria(categoria, titulo) {
         let listaHTML = "";
 
         if (data.results) {
-            // Personajes, planetas, especies, naves, etc.
+            // Personajes, planetas, especies, etc.
             data.results.forEach(item => {
                 listaHTML += `
                 <div class="c-lista-personaje">
@@ -147,7 +125,7 @@ async function MostrarCategoria(categoria, titulo) {
             <section class="c-lista">
                 ${listaHTML}
             </section>
-            <button onclick="Home()">⬅ Volver al Home</button>
+            <button onclick="General()">⬅ Volver al Home</button>
         `;
 
     } catch (error) {

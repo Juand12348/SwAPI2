@@ -1,42 +1,37 @@
 let personajes = [];
-let totalPersonajes = 83;
+let totalPersonajes = 82;
 
-// 🔹 Conexión para obtener todos los personajes (todas las páginas de la API)
-async function Conexion() {
-  let allResults = [];
-  let page = 1;
-  let seguir = true;
+// 🔹 Conexión para obtener la lista de personajes
+async function Conexion(filtroEspecie) {
+    if (filtroEspecie == "All") {
+        const res = await fetch(`https://www.swapi.tech/api/people?limit=${totalPersonajes}`);
+        const data = await res.json();
+        return data.results;
+    } else {
+        const res = await fetch(`https://www.swapi.tech/api/species/${filtroEspecie}`);
+        const data = await res.json();
 
-  try {
-    while (seguir) {
-      const res = await fetch(`https://www.swapi.tech/api/people?page=${page}&limit=10`);
-      const data = await res.json();
+        // Ojo: aquí está la ruta correcta a los personajes de esa especie
+        const personajeEspecie = data.result.properties.people;
 
-      if (data.results && data.results.length > 0) {
-        allResults = allResults.concat(data.results);
-        page++;
-      } else {
-        seguir = false;
-      }
+        return personajeEspecie;
     }
-
-    console.log("✅ Personajes cargados:", allResults.length);
-    return allResults;
-  } catch (error) {
-    console.error("❌ Error al cargar personajes:", error);
-    return [];
-  }
 }
 
-// 🔹 Función principal: inicializa toda la app
+// 🔹 Cargar todos los Personajes al iniciar
 async function General() {
-    try {
-        await Home();
-    } catch (error) {
-        console.error("Error al iniciar la app:", error);
-        document.getElementById("root").innerHTML = "<p>Error al conectar con la API</p>";
+    if (personajes.length === 0) {
+        personajes = await Conexion("All");
     }
+    Home();
 }
 
 General();
 
+// 🔹 Filtro por especie
+async function FiltroConexion(Elfiltro) {
+    document.getElementById("la-lista").innerHTML = "";
+    personajes = await Conexion(Elfiltro);
+    const listaHTML = generarLista(personajes);
+    document.getElementById("la-lista").innerHTML = listaHTML;
+}
