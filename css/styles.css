@@ -98,3 +98,403 @@
   font-size: 0.9rem;
   z-index: 1;
 }
+
+
+/* ----------- HOME GENERAL ----------- */
+#root {
+  background: radial-gradient(circle at 20% 20%, #0a0a0a 0%, #000 100%);
+  min-height: 100vh;
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* ----------- BUSCADOR ----------- */
+.c-buscador {
+  display: block;
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 12px 16px;
+  border: 2px solid #ffe81f;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.c-buscador::placeholder {
+  color: #999;
+}
+
+.c-buscador:focus {
+  background: rgba(255, 232, 31, 0.1);
+  box-shadow: 0 0 10px #ffe81f;
+}
+
+/* ----------- BOTONES DE CATEGORÍAS ----------- */
+.categorias-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.categorias-container button {
+  background: transparent;
+  border: 2px solid #ffe81f;
+  color: #ffe81f;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.categorias-container button:hover {
+  background: #ffe81f;
+  color: #000;
+  box-shadow: 0 0 15px #ffe81f;
+  transform: translateY(-2px);
+}
+
+/* ----------- LISTA DE PERSONAJES ----------- */
+.c-lista-personaje {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 232, 31, 0.4);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  backdrop-filter: blur(2px);
+}
+
+.c-lista-personaje:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 232, 31, 0.6);
+}
+
+.c-lista-personaje p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.c-lista-personaje p:first-child {
+  color: #ffe81f;
+  font-weight: bold;
+}
+
+/* ----------- SECCIÓN LISTA ----------- */
+.c-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+  justify-items: center;
+  padding: 10px;
+}
+
+button[onclick="General()"] {
+  display: block;
+  margin: 30px auto;
+  padding: 12px 25px;
+  background: #ffe81f;
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button[onclick="General()"]:hover {
+  background: #fff;
+  box-shadow: 0 0 10px #ffe81f;
+}
+
+
+/* 🌌 Contenedor del detalle */
+.c-detalle {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #1a1a1a;
+  color: #f5f5f5;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.c-detalle:hover {
+  transform: scale(1.02);
+}
+
+/* ✨ Título del personaje */
+.c-detalle h2 {
+  font-size: 2rem;
+  color: #ffe81f; /* Amarillo Star Wars */
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+/* 📋 Texto de propiedades */
+.c-detalle p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 8px 0;
+  color: #d9d9d9;
+}
+
+/* ❤️ Botón de favorito */
+.c-detalle button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #272727;
+  color: #ffe81f;
+  border: 2px solid #ffe81f;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.c-detalle button:hover {
+  background-color: #ffe81f;
+  color: #000;
+}
+
+/* 🧡 Ícono del corazón */
+.c-detalle span {
+  font-size: 1.4rem;
+  vertical-align: middle;
+}
+
+/* ⬅ Botón de volver */
+.c-detalle button:last-of-type {
+  margin-top: 30px;
+  background-color: transparent;
+  border: 1px solid #888;
+  color: #bbb;
+}
+
+.c-detalle button:last-of-type:hover {
+  background-color: #444;
+  color: #fff;
+}
+
+
+/* 🎴 Contenedor principal del álbum */
+.c-misper {
+  text-align: center;
+  padding: 30px;
+  background: radial-gradient(circle at top, #1a1a1a 0%, #0d0d0d 100%);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* 🎲 Botón para generar personajes aleatorios */
+.btn-aleatorios {
+  background-color: #ffe81f;
+  color: #000;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 232, 31, 0.4);
+  margin-bottom: 20px;
+}
+
+.btn-aleatorios:hover {
+  background-color: #ffce00;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 232, 31, 0.6);
+}
+
+/* 🌠 Contenedor de nuevos personajes */
+.c-nuevos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* 🌟 Estilo para los personajes generados aleatoriamente */
+.c-un_aleatorio {
+  background-color: #222;
+  border: 2px solid #ffe81f;
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: #ffe81f;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(255, 232, 31, 0.3);
+  transition: all 0.3s ease;
+}
+
+.c-un_aleatorio:hover {
+  transform: scale(1.05);
+  background-color: #333;
+}
+
+/* 📘 Contador de personajes */
+#contador {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 25px;
+}
+
+/* 📖 Álbum de personajes */
+.c-album {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  justify-items: center;
+}
+
+/* 🧩 Cada tarjeta del álbum */
+.c-unper {
+  background-color: #1b1b1b;
+  border: 1px solid #444;
+  border-radius: 10px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.c-unper p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* 🌌 Cuando el personaje ha sido descubierto */
+.c-mios-personajes {
+  border: 2px solid #ffe81f;
+  background: rgba(255, 232, 31, 0.1);
+  color: #ffe81f;
+  box-shadow: 0 0 12px rgba(255, 232, 31, 0.4);
+}
+
+.c-mios-personajes:hover {
+  transform: scale(1.05);
+  background: rgba(255, 232, 31, 0.2);
+}
+
+/* ❓ Personajes no capturados */
+.no-capturado {
+  background: #111;
+  color: #555;
+  border: 1px dashed #333;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* 🎇 Animación sutil de aparición */
+.c-unper,
+.c-un_aleatorio {
+  animation: aparecer 0.5s ease;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 🌌 Fondo general */
+body {
+  background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🪐 Navbar principal */
+nav {
+  background: rgba(10, 10, 10, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 2px solid #ffe81f;
+  box-shadow: 0 0 10px rgba(255, 232, 31, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* 🌠 Botones del navbar */
+nav button {
+  background-color: transparent;
+  border: 2px solid #ffe81f;
+  color: #ffe81f;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav button:hover {
+  background-color: #ffe81f;
+  color: #000;
+  box-shadow: 0 0 15px rgba(255, 232, 31, 0.7);
+  transform: scale(1.08);
+}
+
+/* ⚡ Contenedor principal */
+#root {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* 🌟 Animación de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📱 Adaptación móvil */
+@media (max-width: 600px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  nav button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}
