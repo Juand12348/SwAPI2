@@ -1,27 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwAPI</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwAPI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* 🌌 Header galáctico */
+    header {
+      background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+      color: #ffe81f;
+      text-align: center;
+      padding: 30px 0 20px;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px #ffe81f, 0 0 20px #ffcc00, 0 0 40px #ffb700;
+      animation: headerGlow 3s infinite alternate ease-in-out;
+      border-bottom: 2px solid #ffe81f;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    @keyframes headerGlow {
+      from {
+        text-shadow: 0 0 8px #ffe81f, 0 0 20px #ffcc00;
+      }
+      to {
+        text-shadow: 0 0 20px #ffe81f, 0 0 40px #ffb700;
+      }
+    }
+
+    /* 🔹 Navbar */
+    nav {
+      background: rgba(10, 10, 10, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      border-bottom: 2px solid #ffe81f;
+      box-shadow: 0 0 10px rgba(255, 232, 31, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav button {
+      background-color: transparent;
+      border: 2px solid #ffe81f;
+      color: #ffe81f;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav button:hover {
+      background-color: #ffe81f;
+      color: #000;
+      box-shadow: 0 0 15px rgba(255, 232, 31, 0.7);
+      transform: scale(1.08);
+    }
+
+    body {
+      background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #root {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
+
 <body>
-    <nav>
-        <button onclick="Home()">Home</button>
-        <button onclick="Informativa()">Informativa</button>
-        <button onclick="Original()">Original</button>
-        <button onclick="Favoritos()">Favoritos</button>
-    </nav>
+  <header>
+    <h1>SWAPI</h1>
+  </header>
 
-    <div id="root">
-    </div>
+  <nav>
+    <button onclick="Home()">Home</button>
+    <button onclick="Informativa()">Informativa</button>
+    <button onclick="Original()">Original</button>
+    <button onclick="Favoritos()">Favoritos</button>
+  </nav>
 
-    <script src="js/home.js"></script>
-    <script src="js/original.js"></script>
-    <script src="js/favoritos.js"></script>
-    <script src="js/informativa.js"></script>
-    <script src="js/detalle.js"></script>
-    <script src="js/conexion.js"></script>
+  <div id="root"></div>
+
+  <script src="js/home.js"></script>
+  <script src="js/original.js"></script>
+  <script src="js/favoritos.js"></script>
+  <script src="js/informativa.js"></script>
+  <script src="js/detalle.js"></script>
+  <script src="js/conexion.js"></script>
 </body>
 </html>
